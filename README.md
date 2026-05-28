@@ -1,56 +1,85 @@
-# Magazine API
+# cinema
 
-http://127.0.0.1:8000/api/v1/journals/ ИЛИ http://127.0.0.1:8000/api/v1/journals/1/ (для теста)
+## Структура базы данных
 
-REST API для управления журналами, разработанный с использованием Django REST Framework.
+### Movie (Фильмы)
+- title — название фильма
+- genre — жанр
+- duration — длительность
+- release_date — дата выхода
+- rating — рейтинг
+- description — описание
 
-## Модель данных
+### Hall (Залы)
+- name — название зала
+- capacity — вместимость
+- hall_type — тип зала
 
-### Journal
+### Customer (Клиенты)
+- full_name — имя клиента
+- phone — телефон
+- email — email
 
-- id — идентификатор
-- title — название журнала
-- publisher — издательство
-- category — категория
-- issue_number — номер выпуска
-- release_date — дата выпуска
+### Session (Сеансы)
+- movie — фильм
+- hall — зал
+- start_time — время начала
 - price — цена
+- language — язык
 
----
-
-## Эндпоинты API
-
-Базовый URL: 
-/api/v1/journals/
-
-### Получение списка журналов
-
-GET /api/v1/journals/
-
-Фильтры:
-
-- GET /api/v1/journals/?category=IT
-- GET /api/v1/journals/?publisher=Tech
+### Ticket (Билеты)
+- customer — клиент
+- session — сеанс
+- seat_number — место
+- purchase_date — дата покупки
+- status — статус
 
 
-Пример запроса:
+## эндпойнты
 
-```
-{
-  "title": "Python Magazine",
-  "publisher": "Tech Media",
-  "category": "IT",
-  "issue_number": 25,
-  "release_date": "2026-05-25",
-  "price": "499.00"
-}
-```
-Удаление журнала
-DELETE /api/v1/journals/{id}/
+### Movies
+- GET /api/v1/movies/
+- GET /api/v1/movies/{id}/
+- POST /api/v1/movies/
+- PATCH /api/v1/movies/{id}/
+- DELETE /api/v1/movies/{id}/
 
-Документация к API
+### Halls
+- GET /api/v1/halls/
+- GET /api/v1/halls/{id}/
+- POST /api/v1/halls/
+- PATCH /api/v1/halls/{id}/
+- DELETE /api/v1/halls/{id}/
 
+### Customers
+- GET /api/v1/customers/
+- GET /api/v1/customers/{id}/
+- POST /api/v1/customers/
+- PATCH /api/v1/customers/{id}/
+- DELETE /api/v1/customers/{id}/
+
+### Sessions
+- GET /api/v1/sessions/
+- GET /api/v1/sessions/{id}/
+- POST /api/v1/sessions/
+- PATCH /api/v1/sessions/{id}/
+- DELETE /api/v1/sessions/{id}/
+
+### Tickets
+- GET /api/v1/tickets/
+- GET /api/v1/tickets/{id}/
+- POST /api/v1/tickets/
+- PATCH /api/v1/tickets/{id}/
+- DELETE /api/v1/tickets/{id}/
+
+Swagger UI:
 http://127.0.0.1:8000/api/docs/
 
-<img width="1496" height="807" alt="image" src="https://github.com/user-attachments/assets/299aa408-b42a-4361-aef9-c55ee8fbb056" />
-<img width="1461" height="263" alt="image" src="https://github.com/user-attachments/assets/9780c077-b03d-4bb6-85ea-5840385b6a8c" />
+## Запуск проекта
+
+```
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver/
+```
